@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Input from "../ui/Input";
 import Button from "../ui/Button";
 
@@ -23,9 +24,12 @@ export default function LoginForm() {
       {/* Footer */}
       <p className="text-sm text-center text-gray-500 mt-4">
         Don’t have an account?{" "}
-        <span className="text-primary font-semibold cursor-pointer hover:underline">
+        <Link
+          href="/signup"
+          className="text-primary font-semibold hover:underline"
+        >
           Sign up
-        </span>
+        </Link>
       </p>
     </div>
   );
