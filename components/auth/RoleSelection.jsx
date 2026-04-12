@@ -2,22 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { signupRoles } from "@/data/roles";
 import Button from "../ui/Button";
-
-const ROLES = [
-  {
-    id: "seeker",
-    emoji: "👤",
-    label: "Seeker",
-    hint: "I need guidance",
-  },
-  {
-    id: "guide",
-    emoji: "🎓",
-    label: "Guide",
-    hint: "I want to help others",
-  },
-];
 
 export default function RoleSelection() {
   const router = useRouter();
@@ -41,7 +27,7 @@ export default function RoleSelection() {
       </p>
 
       <div className="flex flex-col gap-4 mb-8">
-        {ROLES.map((role) => {
+        {signupRoles.map((role) => {
           const isActive = selected === role.id;
           return (
             <button

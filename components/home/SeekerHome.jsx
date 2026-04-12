@@ -1,4 +1,4 @@
-const DISPLAY_NAME = "Honey";
+import { DEMO_DISPLAY_NAME } from "@/data/user";
 
 export default function SeekerHome() {
   return (
@@ -8,7 +8,7 @@ export default function SeekerHome() {
           KinCircle · Seeker
         </p>
         <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
-          Welcome back, {DISPLAY_NAME} 👋
+          Welcome back, {DEMO_DISPLAY_NAME} 👋
         </h1>
         <p className="text-gray-600">
           Find guidance, ask questions, and move toward your goals—together.
@@ -22,7 +22,7 @@ export default function SeekerHome() {
         >
           Quick actions
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <a
             href="#browse"
             className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-200 hover:border-primary/40 hover:shadow-md hover:-translate-y-0.5"
@@ -49,6 +49,15 @@ export default function SeekerHome() {
               💬
             </span>
             <span className="font-semibold text-gray-800">My chats</span>
+          </a>
+          <a
+            href="/credits"
+            className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-200 hover:border-primary/40 hover:shadow-md hover:-translate-y-0.5"
+          >
+            <span className="text-xl" aria-hidden>
+              💰
+            </span>
+            <span className="font-semibold text-gray-800">My credits</span>
           </a>
         </div>
       </section>

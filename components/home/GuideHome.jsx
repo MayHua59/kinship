@@ -1,28 +1,11 @@
 "use client";
 
 import { useState } from "react";
-
-const MOCK_REQUESTS = [
-  {
-    id: "1",
-    studentName: "Aung Aung",
-    goal: "Wants to study Computer Science in Korea 🇰🇷",
-    message: "Can you guide me on KAIST application?",
-    credits: 12,
-  },
-  {
-    id: "2",
-    studentName: "May Thazin",
-    goal: "Wants to study in Korea 🇰🇷",
-    message: "Looking for scholarship tips and timeline.",
-    credits: 8,
-  },
-];
-
-const DISPLAY_NAME = "Honey";
+import { incomingRequestsMock } from "@/data/guide-incoming-requests";
+import { DEMO_DISPLAY_NAME } from "@/data/user";
 
 export default function GuideHome() {
-  const [requests, setRequests] = useState(MOCK_REQUESTS);
+  const [requests, setRequests] = useState(incomingRequestsMock);
 
   function handleAccept(id) {
     setRequests((prev) => prev.filter((r) => r.id !== id));
@@ -42,7 +25,7 @@ export default function GuideHome() {
           KinCircle · Guide
         </p>
         <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
-          Welcome back, {DISPLAY_NAME} 👋
+          Welcome back, {DEMO_DISPLAY_NAME} 👋
         </h1>
         <p className="text-gray-600">
           Someone might need your guidance today.
@@ -77,7 +60,7 @@ export default function GuideHome() {
             <span className="font-semibold text-gray-800">Active Chats</span>
           </a>
           <a
-            href="#credits"
+            href="/credits"
             className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-200 hover:border-primary/40 hover:shadow-md hover:-translate-y-0.5"
           >
             <span className="text-xl" aria-hidden>
@@ -149,9 +132,7 @@ export default function GuideHome() {
         )}
       </section>
 
-      {/* Anchors for quick actions (stubs for later) */}
       <div id="chats" className="scroll-mt-8" aria-hidden />
-      <div id="credits" className="scroll-mt-8" aria-hidden />
     </div>
   );
 }
