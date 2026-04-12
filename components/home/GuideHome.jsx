@@ -21,8 +21,10 @@ export default function GuideHome() {
     <div className="max-w-2xl mx-auto px-4 py-8 pb-16 space-y-10">
       {/* Welcome */}
       <header className="space-y-1">
-        <p className="text-sm font-medium text-primary uppercase tracking-wide">
-          KinCircle · Guide
+        <p className="text-sm font-medium uppercase tracking-wide">
+          <span className="text-primary">KinCircle</span>
+          <span className="text-gray-400"> · </span>
+          <span className="text-accent">Guide</span>
         </p>
         <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
           Welcome back, {DEMO_DISPLAY_NAME} 👋
@@ -43,7 +45,7 @@ export default function GuideHome() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <a
             href="#requests"
-            className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-200 hover:border-primary/40 hover:shadow-md hover:-translate-y-0.5"
+            className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-200 hover:border-primary/50 hover:shadow-md hover:shadow-primary/10 hover:-translate-y-0.5"
           >
             <span className="text-xl" aria-hidden>
               📥
@@ -51,8 +53,8 @@ export default function GuideHome() {
             <span className="font-semibold text-gray-800">View Requests</span>
           </a>
           <a
-            href="#chats"
-            className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-200 hover:border-primary/40 hover:shadow-md hover:-translate-y-0.5"
+            href="/chats"
+            className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-200 hover:border-accent/50 hover:shadow-md hover:shadow-accent/15 hover:-translate-y-0.5"
           >
             <span className="text-xl" aria-hidden>
               💬
@@ -61,7 +63,7 @@ export default function GuideHome() {
           </a>
           <a
             href="/credits"
-            className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-200 hover:border-primary/40 hover:shadow-md hover:-translate-y-0.5"
+            className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-200 hover:border-primary/50 hover:shadow-md hover:shadow-primary/10 hover:-translate-y-0.5"
           >
             <span className="text-xl" aria-hidden>
               💰
@@ -101,7 +103,7 @@ export default function GuideHome() {
                     </p>
                     <p className="text-sm text-gray-700 mt-0.5">{req.goal}</p>
                   </div>
-                  <span className="text-sm font-medium text-primary whitespace-nowrap">
+                  <span className="text-sm font-semibold text-gray-900 whitespace-nowrap bg-accent/25 px-2.5 py-1 rounded-lg">
                     {req.credits} credits
                   </span>
                 </div>
@@ -114,7 +116,7 @@ export default function GuideHome() {
                   <button
                     type="button"
                     onClick={() => handleAccept(req.id)}
-                    className="flex-1 rounded-xl bg-primary text-white font-semibold py-2.5 px-4 shadow-md shadow-primary/25 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:brightness-110 active:translate-y-0"
+                    className="flex-1 rounded-xl bg-primary text-white font-semibold py-2.5 px-4 shadow-md shadow-primary/25 ring-1 ring-accent/30 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/20 hover:brightness-110 active:translate-y-0"
                   >
                     Accept
                   </button>
@@ -132,7 +134,6 @@ export default function GuideHome() {
         )}
       </section>
 
-      <div id="chats" className="scroll-mt-8" aria-hidden />
     </div>
   );
 }

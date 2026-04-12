@@ -4,8 +4,10 @@ export default function SeekerHome() {
   return (
     <div className="max-w-2xl mx-auto px-4 py-8 pb-16 space-y-10">
       <header className="space-y-1">
-        <p className="text-sm font-medium text-primary uppercase tracking-wide">
-          KinCircle · Seeker
+        <p className="text-sm font-medium uppercase tracking-wide">
+          <span className="text-primary">KinCircle</span>
+          <span className="text-gray-400"> · </span>
+          <span className="text-accent">Seeker</span>
         </p>
         <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
           Welcome back, {DEMO_DISPLAY_NAME} 👋
@@ -25,7 +27,7 @@ export default function SeekerHome() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <a
             href="#browse"
-            className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-200 hover:border-primary/40 hover:shadow-md hover:-translate-y-0.5"
+            className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-200 hover:border-primary/50 hover:shadow-md hover:shadow-primary/10 hover:-translate-y-0.5"
           >
             <span className="text-xl" aria-hidden>
               🔍
@@ -34,7 +36,7 @@ export default function SeekerHome() {
           </a>
           <a
             href="#requests"
-            className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-200 hover:border-primary/40 hover:shadow-md hover:-translate-y-0.5"
+            className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-200 hover:border-accent/50 hover:shadow-md hover:shadow-accent/15 hover:-translate-y-0.5"
           >
             <span className="text-xl" aria-hidden>
               📋
@@ -42,8 +44,8 @@ export default function SeekerHome() {
             <span className="font-semibold text-gray-800">My requests</span>
           </a>
           <a
-            href="#chats"
-            className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-200 hover:border-primary/40 hover:shadow-md hover:-translate-y-0.5"
+            href="/chats"
+            className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-200 hover:border-primary/50 hover:shadow-md hover:shadow-primary/10 hover:-translate-y-0.5"
           >
             <span className="text-xl" aria-hidden>
               💬
@@ -52,7 +54,7 @@ export default function SeekerHome() {
           </a>
           <a
             href="/credits"
-            className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-200 hover:border-primary/40 hover:shadow-md hover:-translate-y-0.5"
+            className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-200 hover:border-accent/50 hover:shadow-md hover:shadow-accent/15 hover:-translate-y-0.5"
           >
             <span className="text-xl" aria-hidden>
               💰
@@ -64,7 +66,7 @@ export default function SeekerHome() {
 
       <section
         id="browse"
-        className="rounded-2xl border border-dashed border-gray-200 bg-white/80 p-8 text-center scroll-mt-8"
+        className="rounded-2xl border border-dashed border-accent/35 bg-white/80 p-8 text-center scroll-mt-8"
       >
         <h2 className="text-lg font-semibold text-gray-900 mb-2">
           Ready when you are

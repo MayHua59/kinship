@@ -40,7 +40,7 @@ export default function CreditsPage() {
   if (!mounted) {
     return (
       <div className="min-h-[50vh] flex items-center justify-center bg-gray-50">
-        <div className="h-10 w-10 rounded-full border-2 border-primary border-t-transparent animate-spin" />
+        <div className="h-10 w-10 rounded-full border-2 border-accent/50 border-t-primary animate-spin" />
       </div>
     );
   }
@@ -50,21 +50,23 @@ export default function CreditsPage() {
   return (
     <div className="min-h-full flex flex-col bg-gray-50">
       <div className="relative overflow-hidden">
-        <div className="absolute top-[-60px] right-[-40px] w-56 h-56 bg-primary/15 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-[-40px] left-[-20px] w-48 h-48 bg-accent/30 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-[-60px] right-[-40px] w-56 h-56 bg-accent/25 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-[-40px] left-[-20px] w-48 h-48 bg-primary/15 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative max-w-2xl mx-auto px-4 pt-6 pb-16">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-primary transition-colors mb-8"
+            className="inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-accent transition-colors mb-8"
           >
             <span aria-hidden>←</span>
             Back to home
           </Link>
 
           <header className="mb-8">
-            <p className="text-sm font-medium text-primary uppercase tracking-wide mb-1">
-              {isGuide ? "KinCircle · Guide" : "KinCircle · Seeker"}
+            <p className="text-sm font-medium uppercase tracking-wide mb-1">
+              <span className="text-primary">KinCircle</span>
+              <span className="text-gray-400"> · </span>
+              <span className="text-accent">{isGuide ? "Guide" : "Seeker"}</span>
             </p>
             <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
               My credits
@@ -77,7 +79,7 @@ export default function CreditsPage() {
           </header>
 
           {/* Balance / earnings hero */}
-          <div className="rounded-3xl bg-linear-to-br from-primary to-orange-600 text-white p-6 sm:p-8 shadow-lg shadow-primary/25 mb-8">
+          <div className="rounded-3xl bg-linear-to-br from-primary to-orange-600 text-white p-6 sm:p-8 shadow-lg ring-2 ring-accent/40 mb-8">
             <p className="text-sm font-medium text-white/90">
               {isGuide ? "Total credits earned" : "Available balance"}
             </p>
@@ -96,15 +98,15 @@ export default function CreditsPage() {
           {/* Secondary stats — guide only */}
           {isGuide ? (
             <div className="grid grid-cols-2 gap-3 mb-10">
-              <div className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
+              <div className="rounded-2xl border border-gray-200 border-t-4 border-t-primary bg-white p-4 shadow-sm">
                 <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
                   This month
                 </p>
-                <p className="text-2xl font-bold text-gray-900 tabular-nums mt-1">
+                <p className="text-2xl font-bold text-primary tabular-nums mt-1">
                   +{guideCreditsDemo.thisMonth}
                 </p>
               </div>
-              <div className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
+              <div className="rounded-2xl border border-gray-200 border-t-4 border-t-accent bg-white p-4 shadow-sm">
                 <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
                   Sessions
                 </p>
