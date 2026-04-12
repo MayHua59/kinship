@@ -1,9 +1,5 @@
-import Image from "next/image";
+import HomePage from "@/components/home/HomePage";
 
 export default function Home() {
-  return (
-    <div className="bg-primary text-primary p-4">
-  Kinship Theme Working 🚀
-</div>
-  );
+  return <HomePage />;
 }
