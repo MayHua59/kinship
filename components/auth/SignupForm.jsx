@@ -1,8 +1,18 @@
+"use client";
+
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import Input from "../ui/Input";
 import Button from "../ui/Button";
 
 export default function SignupForm() {
+  const router = useRouter();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    router.push("/signup/role");
+  }
+
   return (
     <div className="w-full max-w-md bg-white p-8 rounded-3xl shadow-lg relative z-10">
       <h2 className="text-3xl font-bold text-center text-gray-800 mb-2">
@@ -12,7 +22,7 @@ export default function SignupForm() {
         Create an account and build something together.
       </p>
 
-      <form className="flex flex-col gap-5" action="#" method="post">
+      <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
         <Input
           label="Name"
           name="name"
