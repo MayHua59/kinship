@@ -1,0 +1,174 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
+
+const SEEKER_LINKS = [
+  { href: "/", label: "Home", emoji: "🏠", match: (path, hash) => path === "/" && !hash },
+  {
+    href: "/find-guide",
+    label: "Find Guide",
+    emoji: "🔍",
+    match: (path) => path.startsWith("/find-guide"),
+  },
+  {
+    href: "/my-requests",
+    label: "My Requests",
+    emoji: "💬",
+    match: (path) => path.startsWith("/my-requests"),
+  },
+  {
+    href: "/profile",
+    label: "Profile",
+    emoji: "👤",
+    match: (path) => path.startsWith("/profile"),
+  },
+];
+
+const GUIDE_LINKS = [
+  {
+    href: "/",
+    label: "Home",
+    emoji: "🏠",
+    match: (path, hash) => path === "/" && (!hash || hash === "#"),
+  },
+  {
+    href: "/#requests",
+    label: "Requests",
+    emoji: "📥",
+    match: (path, hash) => path === "/" && hash === "#requests",
+  },
+  {
+    href: "/chats",
+    label: "Chats",
+    emoji: "💬",
+    match: (path) => path.startsWith("/chats"),
+  },
+  {
+    href: "/guide/profile",
+    label: "Profile",
+    emoji: "👤",
+    match: (path) =>
+      path.startsWith("/guide/profile") || path.startsWith("/guide/bio"),
+  },
+];
+
+export default function AppNavbar() {
+  const pathname = usePathname() ?? "";
+  const [role, setRole] = useState(null);
+  const [mounted, setMounted] = useState(false);
+  const [hash, setHash] = useState("");
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const syncHash = useCallback(() => {
+    if (typeof window === "undefined") return;
+    setHash(window.location.hash || "");
+  }, []);
+
+  useEffect(() => {
+    setMounted(true);
+    const stored =
+      typeof window !== "undefined"
+        ? window.localStorage.getItem("kinship-role")
+        : null;
+    setRole(stored === "guide" ? "guide" : "seeker");
+    syncHash();
+    window.addEventListener("hashchange", syncHash);
+    return () => window.removeEventListener("hashchange", syncHash);
+  }, [syncHash]);
+
+  useEffect(() => {
+    syncHash();
+  }, [pathname, syncHash]);
+
+  const links = role === "guide" ? GUIDE_LINKS : SEEKER_LINKS;
+
+  if (!mounted) {
+    return (
+      <header className="sticky top-0 z-50 h-14 border-b border-gray-200/80 bg-gray-50/95 backdrop-blur-md" />
+    );
+  }
+
+  return (
+    <header className="sticky top-0 z-50 border-b border-gray-200/80 bg-gray-50/95 backdrop-blur-md">
+      <div className="mx-auto flex max-w-5xl items-center justify-between gap-3 px-4 py-3">
+        <Link
+          href="/"
+          className="shrink-0 text-sm font-semibold tracking-tight text-gray-900"
+          onClick={() => setMenuOpen(false)}
+        >
+          <span className="text-primary">Kin</span>
+          <span className="text-gray-800">Circle</span>
+        </Link>
+
+        <nav
+          className="hidden min-w-0 flex-1 items-center justify-end gap-1 sm:flex"
+          aria-label="Main"
+        >
+          {links.map((item) => {
+            const active = item.match(pathname, hash);
+            return (
+              <Link
+                key={item.href + item.label}
+                href={item.href}
+                className={`rounded-xl px-3 py-2 text-sm font-medium transition-colors ${
+                  active
+                    ? "bg-primary/10 text-primary"
+                    : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                }`}
+              >
+                <span className="mr-1.5 opacity-90" aria-hidden>
+                  {item.emoji}
+                </span>
+                {item.label}
+              </Link>
+            );
+          })}
+        </nav>
+
+        <button
+          type="button"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-gray-200 bg-white text-gray-700 shadow-sm sm:hidden"
+          aria-expanded={menuOpen}
+          aria-controls="mobile-main-nav"
+          onClick={() => setMenuOpen((o) => !o)}
+        >
+          <span className="sr-only">{menuOpen ? "Close menu" : "Open menu"}</span>
+          <span aria-hidden className="text-lg leading-none">
+            {menuOpen ? "✕" : "☰"}
+          </span>
+        </button>
+      </div>
+
+      {menuOpen ? (
+        <div
+          id="mobile-main-nav"
+          className="border-t border-gray-200/80 bg-gray-50/98 px-4 pb-4 sm:hidden"
+        >
+          <ul className="flex flex-col gap-1 pt-2">
+            {links.map((item) => {
+              const active = item.match(pathname, hash);
+              return (
+                <li key={item.href + item.label}>
+                  <Link
+                    href={item.href}
+                    className={`flex items-center gap-2 rounded-xl px-3 py-3 text-sm font-medium ${
+                      active
+                        ? "bg-primary/10 text-primary"
+                        : "text-gray-700 hover:bg-gray-100"
+                    }`}
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <span aria-hidden>{item.emoji}</span>
+                    {item.label}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      ) : null}
+    </header>
+  );
+}
