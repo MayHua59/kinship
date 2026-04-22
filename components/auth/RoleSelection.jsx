@@ -29,6 +29,7 @@ export default function RoleSelection() {
       <div className="flex flex-col gap-4 mb-8">
         {signupRoles.map((role) => {
           const isActive = selected === role.id;
+          const RoleIcon = role.icon;
           return (
             <button
               key={role.id}
@@ -42,9 +43,7 @@ export default function RoleSelection() {
               }`}
             >
               <span className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-                <span className="text-2xl shrink-0" aria-hidden>
-                  {role.emoji}
-                </span>
+                <RoleIcon className="h-7 w-7 shrink-0 text-gray-700" aria-hidden />
                 <span>
                   <span className="font-semibold text-gray-800">{role.label}</span>
                   <span className="text-gray-500"> ({role.hint})</span>

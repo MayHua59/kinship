@@ -1,3 +1,5 @@
+import { StarIcon } from "@heroicons/react/24/solid";
+
 export default function GuideCard({ guide }) {
   return (
     <div className="bg-white p-5 rounded-2xl shadow hover:shadow-md transition">
@@ -10,7 +12,10 @@ export default function GuideCard({ guide }) {
       <p className="text-sm text-gray-600 mt-2">{guide.bio}</p>
 
       <div className="flex justify-between items-center mt-4">
-        <span className="text-yellow-500">⭐ {guide.rating}</span>
+        <span className="inline-flex items-center gap-1 text-yellow-500">
+          <StarIcon className="h-5 w-5" aria-hidden />
+          <span>{guide.rating}</span>
+        </span>
 
         <span className="text-primary font-semibold">
           {guide.credits} credits

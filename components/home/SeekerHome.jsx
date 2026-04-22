@@ -1,4 +1,11 @@
 import { DEMO_DISPLAY_NAME } from "@/data/user";
+import {
+  ChatBubbleLeftRightIcon,
+  ClipboardDocumentListIcon,
+  CurrencyDollarIcon,
+  HandRaisedIcon,
+  MagnifyingGlassIcon,
+} from "@heroicons/react/24/solid";
 
 export default function SeekerHome() {
   return (
@@ -9,8 +16,9 @@ export default function SeekerHome() {
           <span className="text-gray-400"> · </span>
           <span className="text-accent">Seeker</span>
         </p>
-        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
-          Welcome back, {DEMO_DISPLAY_NAME} 👋
+        <h1 className="flex flex-wrap items-center gap-2 text-2xl sm:text-3xl font-bold text-gray-900">
+          <span>Welcome back, {DEMO_DISPLAY_NAME}</span>
+          <HandRaisedIcon className="h-7 w-7 text-accent" aria-hidden />
         </h1>
         <p className="text-gray-600">
           Find guidance, ask questions, and move toward your goals—together.
@@ -29,36 +37,28 @@ export default function SeekerHome() {
             href="#browse"
             className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-200 hover:border-primary/50 hover:shadow-md hover:shadow-primary/10 hover:-translate-y-0.5"
           >
-            <span className="text-xl" aria-hidden>
-              🔍
-            </span>
+            <MagnifyingGlassIcon className="h-6 w-6 text-primary" aria-hidden />
             <span className="font-semibold text-gray-800">Find a guide</span>
           </a>
           <a
             href="#requests"
             className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-200 hover:border-accent/50 hover:shadow-md hover:shadow-accent/15 hover:-translate-y-0.5"
           >
-            <span className="text-xl" aria-hidden>
-              📋
-            </span>
+            <ClipboardDocumentListIcon className="h-6 w-6 text-accent" aria-hidden />
             <span className="font-semibold text-gray-800">My requests</span>
           </a>
           <a
             href="/chats"
             className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-200 hover:border-primary/50 hover:shadow-md hover:shadow-primary/10 hover:-translate-y-0.5"
           >
-            <span className="text-xl" aria-hidden>
-              💬
-            </span>
+            <ChatBubbleLeftRightIcon className="h-6 w-6 text-primary" aria-hidden />
             <span className="font-semibold text-gray-800">My chats</span>
           </a>
           <a
             href="/credits"
             className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-200 hover:border-accent/50 hover:shadow-md hover:shadow-accent/15 hover:-translate-y-0.5"
           >
-            <span className="text-xl" aria-hidden>
-              💰
-            </span>
+            <CurrencyDollarIcon className="h-6 w-6 text-accent" aria-hidden />
             <span className="font-semibold text-gray-800">My credits</span>
           </a>
         </div>

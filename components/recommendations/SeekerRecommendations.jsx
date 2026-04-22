@@ -3,6 +3,10 @@
 import { useMemo, useState } from "react";
 import { studyOpportunities } from "@/data/study-opportunities";
 import { getStudyRecommendations } from "@/lib/recommendations";
+import {
+  ArrowTopRightOnSquareIcon,
+  CheckIcon,
+} from "@heroicons/react/24/solid";
 
 const FIELDS = [
   "STEM",
@@ -383,9 +387,7 @@ export default function SeekerRecommendations() {
                 <ul className="mt-3 text-sm text-gray-700 space-y-1">
                   {r.reasons?.slice(0, 3)?.map((reason, idx) => (
                     <li key={idx} className="flex gap-2">
-                      <span className="text-accent" aria-hidden>
-                        ✓
-                      </span>
+                      <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-accent" aria-hidden />
                       <span>{reason}</span>
                     </li>
                   ))}
@@ -400,7 +402,7 @@ export default function SeekerRecommendations() {
                       className="inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm font-semibold text-gray-800 transition-all duration-200 hover:border-primary/50 hover:shadow-sm"
                     >
                       Open official page
-                      <span aria-hidden>↗</span>
+                      <ArrowTopRightOnSquareIcon className="h-4 w-4 text-gray-500" aria-hidden />
                     </a>
                   </div>
                 ) : null}

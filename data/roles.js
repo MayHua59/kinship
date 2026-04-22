@@ -1,14 +1,16 @@
 /** Signup / onboarding role choices (Seeker vs Guide). */
+import { AcademicCapIcon, UserCircleIcon } from "@heroicons/react/24/solid";
+
 export const signupRoles = [
   {
     id: "seeker",
-    emoji: "👤",
+    icon: UserCircleIcon,
     label: "Seeker",
     hint: "I need guidance",
   },
   {
     id: "guide",
-    emoji: "🎓",
+    icon: AcademicCapIcon,
     label: "Guide",
     hint: "I want to help others",
   },

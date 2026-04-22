@@ -3,25 +3,39 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
+import {
+  Bars3Icon,
+  ChatBubbleLeftRightIcon,
+  HomeIcon,
+  InboxArrowDownIcon,
+  MagnifyingGlassIcon,
+  UserCircleIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/solid";
 
 const SEEKER_LINKS = [
-  { href: "/", label: "Home", emoji: "🏠", match: (path, hash) => path === "/" && !hash },
+  {
+    href: "/",
+    label: "Home",
+    icon: HomeIcon,
+    match: (path, hash) => path === "/" && !hash,
+  },
   {
     href: "/find-guide",
     label: "Find Guide",
-    emoji: "🔍",
+    icon: MagnifyingGlassIcon,
     match: (path) => path.startsWith("/find-guide"),
   },
   {
     href: "/my-requests",
     label: "My Requests",
-    emoji: "💬",
+    icon: ChatBubbleLeftRightIcon,
     match: (path) => path.startsWith("/my-requests"),
   },
   {
     href: "/profile",
     label: "Profile",
-    emoji: "👤",
+    icon: UserCircleIcon,
     match: (path) => path.startsWith("/profile"),
   },
 ];
@@ -30,25 +44,25 @@ const GUIDE_LINKS = [
   {
     href: "/",
     label: "Home",
-    emoji: "🏠",
+    icon: HomeIcon,
     match: (path, hash) => path === "/" && (!hash || hash === "#"),
   },
   {
     href: "/#requests",
     label: "Requests",
-    emoji: "📥",
+    icon: InboxArrowDownIcon,
     match: (path, hash) => path === "/" && hash === "#requests",
   },
   {
     href: "/chats",
     label: "Chats",
-    emoji: "💬",
+    icon: ChatBubbleLeftRightIcon,
     match: (path) => path.startsWith("/chats"),
   },
   {
     href: "/guide/profile",
     label: "Profile",
-    emoji: "👤",
+    icon: UserCircleIcon,
     match: (path) =>
       path.startsWith("/guide/profile") || path.startsWith("/guide/bio"),
   },
@@ -108,6 +122,7 @@ export default function AppNavbar() {
         >
           {links.map((item) => {
             const active = item.match(pathname, hash);
+            const ItemIcon = item.icon;
             return (
               <Link
                 key={item.href + item.label}
@@ -118,9 +133,7 @@ export default function AppNavbar() {
                     : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
                 }`}
               >
-                <span className="mr-1.5 opacity-90" aria-hidden>
-                  {item.emoji}
-                </span>
+                <ItemIcon className="mr-1.5 inline-block h-4 w-4 opacity-90" aria-hidden />
                 {item.label}
               </Link>
             );
@@ -135,9 +148,11 @@ export default function AppNavbar() {
           onClick={() => setMenuOpen((o) => !o)}
         >
           <span className="sr-only">{menuOpen ? "Close menu" : "Open menu"}</span>
-          <span aria-hidden className="text-lg leading-none">
-            {menuOpen ? "✕" : "☰"}
-          </span>
+          {menuOpen ? (
+            <XMarkIcon className="h-5 w-5" aria-hidden />
+          ) : (
+            <Bars3Icon className="h-5 w-5" aria-hidden />
+          )}
         </button>
       </div>
 
@@ -149,6 +164,7 @@ export default function AppNavbar() {
           <ul className="flex flex-col gap-1 pt-2">
             {links.map((item) => {
               const active = item.match(pathname, hash);
+              const ItemIcon = item.icon;
               return (
                 <li key={item.href + item.label}>
                   <Link
@@ -160,7 +176,7 @@ export default function AppNavbar() {
                     }`}
                     onClick={() => setMenuOpen(false)}
                   >
-                    <span aria-hidden>{item.emoji}</span>
+                    <ItemIcon className="h-5 w-5" aria-hidden />
                     {item.label}
                   </Link>
                 </li>

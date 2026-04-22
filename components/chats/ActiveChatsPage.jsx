@@ -3,6 +3,10 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { guideActiveChatsDemo, seekerActiveChatsDemo } from "@/data/active-chats";
+import {
+  ArrowLeftIcon,
+  ChatBubbleLeftRightIcon,
+} from "@heroicons/react/24/solid";
 
 function initials(name) {
   return name
@@ -32,7 +36,7 @@ function ChatRow({ chat, isGuide }) {
               <p className="font-semibold text-gray-900">
                 {isGuide ? "Chat with " : ""}
                 {chat.peerName}
-                <span className="font-normal text-gray-500"> 💬</span>
+                <ChatBubbleLeftRightIcon className="ml-1 inline-block h-4 w-4 text-gray-400" aria-hidden />
               </p>
               <p className="text-xs text-gray-500 mt-0.5">{chat.peerLabel}</p>
             </div>
@@ -89,7 +93,7 @@ export default function ActiveChatsPage() {
             href="/"
             className="inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-accent transition-colors mb-8"
           >
-            <span aria-hidden>←</span>
+            <ArrowLeftIcon className="h-4 w-4" aria-hidden />
             Back to home
           </Link>
 
