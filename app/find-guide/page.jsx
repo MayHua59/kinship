@@ -1,11 +1,15 @@
 import GuideList from "@/components/guide/GuideList";
+import { MagnifyingGlassIcon, SparklesIcon } from "@heroicons/react/24/solid";
 
 export default function FindGuidePage() {
   return (
     <main className="min-h-screen bg-gray-50 p-4 md:p-8">
       <div className="max-w-4xl mx-auto">
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-gray-800">Find a Guide 🔍</h1>
+          <h1 className="flex items-center gap-2 text-2xl font-bold text-gray-800">
+            <span>Find a Guide</span>
+            <MagnifyingGlassIcon className="h-6 w-6 text-gray-700" aria-hidden />
+          </h1>
           <p className="text-gray-500 mt-1">
             Connect with someone who has walked your path.
           </p>
@@ -27,9 +31,7 @@ export default function FindGuidePage() {
               ranked list.
             </p>
           </div>
-          <span className="text-2xl" aria-hidden>
-            ✨
-          </span>
+          <SparklesIcon className="h-7 w-7 text-primary" aria-hidden />
         </a>
 
         <input
