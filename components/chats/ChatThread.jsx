@@ -97,22 +97,12 @@ export default function ChatThread() {
   const chatId = typeof params?.id === "string" ? params.id : null;
   const thread = chatId ? getChatThread(chatId) : null;
 
-  const [messages, setMessages] = useState(() =>
-    chatId ? getChatThread(chatId)?.messages ?? [] : []
-  );
+  const [messages, setMessages] = useState(() => thread?.messages ?? []);
   const [draft, setDraft] = useState("");
   const bottomRef = useRef(null);
   const fileInputRef = useRef(null);
   const imageInputRef = useRef(null);
   const blobUrlsRef = useRef([]);
-
-  useEffect(() => {
-    if (!chatId) {
-      setMessages([]);
-      return;
-    }
-    setMessages(getChatThread(chatId)?.messages ?? []);
-  }, [chatId]);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import Button from "@/components/ui/Button";
 
@@ -8,59 +8,46 @@ const PROFILE_KEY = "kinship-guide-profile";
 
 export default function GuideBioPage() {
   const router = useRouter();
-  const [mounted, setMounted] = useState(false);
-  const [bio, setBio] = useState("");
-  const [university, setUniversity] = useState("");
-  const [scholarship, setScholarship] = useState("");
-  const [country, setCountry] = useState("");
-  const [field, setField] = useState("");
-  const maxChars = 220;
-
-  useEffect(() => {
-    setMounted(true);
-    const raw =
-      typeof window !== "undefined"
-        ? window.localStorage.getItem(PROFILE_KEY)
-        : null;
-
-    if (!raw) return;
-
+  const [profile, setProfile] = useState(() => {
+    const base = {
+      bio: "",
+      university: "",
+      scholarship: "",
+      country: "",
+      field: "",
+    };
+    if (typeof window === "undefined") return base;
+    const raw = window.localStorage.getItem(PROFILE_KEY);
+    if (!raw) return base;
     try {
       const existing = JSON.parse(raw);
-      setBio(existing?.bio ?? "");
-      setUniversity(existing?.university ?? "");
-      setScholarship(existing?.scholarship ?? "");
-      setCountry(existing?.country ?? "");
-      setField(existing?.field ?? "");
+      return {
+        ...base,
+        ...(existing ?? {}),
+      };
     } catch {
-      // If old/invalid data exists, ignore it.
+      return base;
     }
-  }, []);
+  });
+  const maxChars = 220;
 
-  const remaining = useMemo(() => maxChars - bio.length, [bio.length]);
-  const canSave = mounted && bio.length <= maxChars;
+  const remaining = useMemo(() => maxChars - profile.bio.length, [profile.bio.length]);
+  const canSave = profile.bio.length <= maxChars;
 
   function handleSave() {
     if (!canSave) return;
+    if (typeof window === "undefined") return;
     window.localStorage.setItem(
       PROFILE_KEY,
       JSON.stringify({
-        bio: bio.trim(),
-        university: university.trim(),
-        scholarship: scholarship.trim(),
-        country: country.trim(),
-        field: field.trim(),
+        bio: profile.bio.trim(),
+        university: profile.university.trim(),
+        scholarship: profile.scholarship.trim(),
+        country: profile.country.trim(),
+        field: profile.field.trim(),
       })
     );
     router.push("/guide/profile");
-  }
-
-  if (!mounted) {
-    return (
-      <div className="min-h-[60vh] flex items-center justify-center bg-gray-50">
-        <div className="h-10 w-10 rounded-full border-2 border-accent/50 border-t-primary animate-spin" />
-      </div>
-    );
   }
 
   return (
@@ -85,9 +72,9 @@ export default function GuideBioPage() {
                 Country
               </label>
               <input
-                value={country}
-                onChange={(e) => setCountry(e.target.value)}
-                placeholder="Example: South Korea 🇰🇷"
+                value={profile.country}
+                onChange={(e) => setProfile((p) => ({ ...p, country: e.target.value }))}
+                placeholder="Example: South Korea"
                 className="w-full rounded-2xl border border-gray-300 px-4 py-3 text-gray-900 outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
               />
             </div>
@@ -95,8 +82,8 @@ export default function GuideBioPage() {
             <div className="space-y-2">
               <label className="text-sm font-semibold text-gray-800">Field</label>
               <input
-                value={field}
-                onChange={(e) => setField(e.target.value)}
+                value={profile.field}
+                onChange={(e) => setProfile((p) => ({ ...p, field: e.target.value }))}
                 placeholder="Example: Computer Science"
                 className="w-full rounded-2xl border border-gray-300 px-4 py-3 text-gray-900 outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
               />
@@ -107,8 +94,8 @@ export default function GuideBioPage() {
                 University
               </label>
               <input
-                value={university}
-                onChange={(e) => setUniversity(e.target.value)}
+                value={profile.university}
+                onChange={(e) => setProfile((p) => ({ ...p, university: e.target.value }))}
                 placeholder="Example: KAIST"
                 className="w-full rounded-2xl border border-gray-300 px-4 py-3 text-gray-900 outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
               />
@@ -119,8 +106,10 @@ export default function GuideBioPage() {
                 Scholarship
               </label>
               <input
-                value={scholarship}
-                onChange={(e) => setScholarship(e.target.value)}
+                value={profile.scholarship}
+                onChange={(e) =>
+                  setProfile((p) => ({ ...p, scholarship: e.target.value }))
+                }
                 placeholder="Example: MEXT / Fulbright / KAIST Scholarship"
                 className="w-full rounded-2xl border border-gray-300 px-4 py-3 text-gray-900 outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
               />
@@ -132,8 +121,8 @@ export default function GuideBioPage() {
               Your bio
             </label>
             <textarea
-              value={bio}
-              onChange={(e) => setBio(e.target.value)}
+              value={profile.bio}
+              onChange={(e) => setProfile((p) => ({ ...p, bio: e.target.value }))}
               rows={5}
               maxLength={maxChars}
               placeholder="Example: CS student at KAIST — I can help with scholarship applications, essays, and interview prep."

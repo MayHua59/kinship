@@ -70,9 +70,14 @@ const GUIDE_LINKS = [
 
 export default function AppNavbar() {
   const pathname = usePathname() ?? "";
-  const [role, setRole] = useState(null);
-  const [mounted, setMounted] = useState(false);
-  const [hash, setHash] = useState("");
+  const [role, setRole] = useState(() => {
+    if (typeof window === "undefined") return "seeker";
+    const stored = window.localStorage.getItem("kinship-role");
+    return stored === "guide" ? "guide" : "seeker";
+  });
+  const [hash, setHash] = useState(() =>
+    typeof window === "undefined" ? "" : window.location.hash || ""
+  );
   const [menuOpen, setMenuOpen] = useState(false);
 
   const syncHash = useCallback(() => {
@@ -81,28 +86,22 @@ export default function AppNavbar() {
   }, []);
 
   useEffect(() => {
-    setMounted(true);
-    const stored =
-      typeof window !== "undefined"
-        ? window.localStorage.getItem("kinship-role")
-        : null;
-    setRole(stored === "guide" ? "guide" : "seeker");
+    if (typeof window === "undefined") return;
+    const handleHashChange = () => syncHash();
+    const handleStorage = (e) => {
+      if (e.key !== "kinship-role") return;
+      setRole(e.newValue === "guide" ? "guide" : "seeker");
+    };
     syncHash();
     window.addEventListener("hashchange", syncHash);
-    return () => window.removeEventListener("hashchange", syncHash);
+    window.addEventListener("storage", handleStorage);
+    return () => {
+      window.removeEventListener("hashchange", syncHash);
+      window.removeEventListener("storage", handleStorage);
+    };
   }, [syncHash]);
 
-  useEffect(() => {
-    syncHash();
-  }, [pathname, syncHash]);
-
   const links = role === "guide" ? GUIDE_LINKS : SEEKER_LINKS;
-
-  if (!mounted) {
-    return (
-      <header className="sticky top-0 z-50 h-14 border-b border-gray-200/80 bg-gray-50/95 backdrop-blur-md" />
-    );
-  }
 
   return (
     <header className="sticky top-0 z-50 border-b border-gray-200/80 bg-gray-50/95 backdrop-blur-md">

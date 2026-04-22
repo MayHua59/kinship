@@ -7,22 +7,20 @@ import { DEMO_DISPLAY_NAME } from "@/data/user";
 
 export default function SeekerProfilePage() {
   const router = useRouter();
-  const [mounted, setMounted] = useState(false);
-  const [isGuide, setIsGuide] = useState(false);
+  const [role] = useState(() => {
+    if (typeof window === "undefined") return "seeker";
+    const stored = window.localStorage.getItem("kinship-role");
+    return stored === "guide" ? "guide" : "seeker";
+  });
+
+  const isGuide = role === "guide";
 
   useEffect(() => {
-    setMounted(true);
-    const stored =
-      typeof window !== "undefined"
-        ? window.localStorage.getItem("kinship-role")
-        : null;
-    if (stored === "guide") {
-      setIsGuide(true);
-      router.replace("/guide/profile");
-    }
-  }, [router]);
+    if (!isGuide) return;
+    router.replace("/guide/profile");
+  }, [isGuide, router]);
 
-  if (!mounted || isGuide) {
+  if (isGuide) {
     return (
       <div className="flex min-h-[50vh] flex-1 items-center justify-center bg-gray-50">
         <div className="h-10 w-10 animate-spin rounded-full border-2 border-accent/50 border-t-primary" />

@@ -1,4 +1,5 @@
 import { DEMO_DISPLAY_NAME } from "@/data/user";
+import Link from "next/link";
 import {
   ChatBubbleLeftRightIcon,
   ClipboardDocumentListIcon,
@@ -47,13 +48,13 @@ export default function SeekerHome() {
             <ClipboardDocumentListIcon className="h-6 w-6 text-accent" aria-hidden />
             <span className="font-semibold text-gray-800">My requests</span>
           </a>
-          <a
+          <Link
             href="/chats"
             className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-200 hover:border-primary/50 hover:shadow-md hover:shadow-primary/10 hover:-translate-y-0.5"
           >
             <ChatBubbleLeftRightIcon className="h-6 w-6 text-primary" aria-hidden />
             <span className="font-semibold text-gray-800">My chats</span>
-          </a>
+          </Link>
           <a
             href="/credits"
             className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-200 hover:border-accent/50 hover:shadow-md hover:shadow-accent/15 hover:-translate-y-0.5"

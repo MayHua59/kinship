@@ -1,58 +1,35 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { DEMO_DISPLAY_NAME } from "@/data/user";
 
 const PROFILE_KEY = "kinship-guide-profile";
 
 export default function GuideProfilePage() {
-  const [mounted, setMounted] = useState(false);
-  const [profile, setProfile] = useState({
-    bio: "",
-    university: "",
-    scholarship: "",
-    country: "",
-    field: "",
-  });
+  const [profile] = useState(() => {
+    const base = {
+      bio: "",
+      university: "",
+      scholarship: "",
+      country: "",
+      field: "",
+    };
+    if (typeof window === "undefined") return base;
 
-  useEffect(() => {
-    setMounted(true);
-    const raw =
-      typeof window !== "undefined"
-        ? window.localStorage.getItem(PROFILE_KEY)
-        : null;
-
+    const raw = window.localStorage.getItem(PROFILE_KEY);
     if (raw) {
       try {
         const parsed = JSON.parse(raw);
-        setProfile((prev) => ({
-          ...prev,
-          ...(parsed ?? {}),
-        }));
-        return;
+        return { ...base, ...(parsed ?? {}) };
       } catch {
         // ignore invalid JSON and try fallback below
       }
     }
 
-    // Backward compatibility: if an old single-bio key exists, read it once.
-    const legacyBio =
-      typeof window !== "undefined"
-        ? window.localStorage.getItem("kinship-guide-bio")
-        : null;
-    if (legacyBio) {
-      setProfile((prev) => ({ ...prev, bio: legacyBio }));
-    }
-  }, []);
-
-  if (!mounted) {
-    return (
-      <div className="min-h-[60vh] flex items-center justify-center bg-gray-50">
-        <div className="h-10 w-10 rounded-full border-2 border-accent/50 border-t-primary animate-spin" />
-      </div>
-    );
-  }
+    const legacyBio = window.localStorage.getItem("kinship-guide-bio");
+    return legacyBio ? { ...base, bio: legacyBio } : base;
+  });
 
   const hasAny =
     profile.bio.trim() ||

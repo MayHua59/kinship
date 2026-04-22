@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { guideCreditsDemo, seekerCreditsDemo } from "@/data/credits";
 import { DEMO_DISPLAY_NAME } from "@/data/user";
+import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 
 function ActivityRow({ title, detail, amount, time }) {
   const isPositive = amount > 0;
@@ -25,25 +26,21 @@ function ActivityRow({ title, detail, amount, time }) {
 }
 
 export default function CreditsPage() {
-  const [role, setRole] = useState(null);
-  const [mounted, setMounted] = useState(false);
+  const [role, setRole] = useState(() => {
+    if (typeof window === "undefined") return "seeker";
+    const stored = window.localStorage.getItem("kinship-role");
+    return stored === "guide" ? "guide" : "seeker";
+  });
 
   useEffect(() => {
-    setMounted(true);
-    const stored =
-      typeof window !== "undefined"
-        ? window.localStorage.getItem("kinship-role")
-        : null;
-    setRole(stored === "guide" ? "guide" : "seeker");
+    if (typeof window === "undefined") return;
+    const handleStorage = (e) => {
+      if (e.key !== "kinship-role") return;
+      setRole(e.newValue === "guide" ? "guide" : "seeker");
+    };
+    window.addEventListener("storage", handleStorage);
+    return () => window.removeEventListener("storage", handleStorage);
   }, []);
-
-  if (!mounted) {
-    return (
-      <div className="min-h-[50vh] flex items-center justify-center bg-gray-50">
-        <div className="h-10 w-10 rounded-full border-2 border-accent/50 border-t-primary animate-spin" />
-      </div>
-    );
-  }
 
   const isGuide = role === "guide";
 
@@ -58,7 +55,7 @@ export default function CreditsPage() {
             href="/"
             className="inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-accent transition-colors mb-8"
           >
-            <span aria-hidden>←</span>
+            <ArrowLeftIcon className="h-4 w-4" aria-hidden />
             Back to home
           </Link>
 

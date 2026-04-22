@@ -59,25 +59,21 @@ function ChatRow({ chat, isGuide }) {
 }
 
 export default function ActiveChatsPage() {
-  const [role, setRole] = useState(null);
-  const [mounted, setMounted] = useState(false);
+  const [role, setRole] = useState(() => {
+    if (typeof window === "undefined") return "seeker";
+    const stored = window.localStorage.getItem("kinship-role");
+    return stored === "guide" ? "guide" : "seeker";
+  });
 
   useEffect(() => {
-    setMounted(true);
-    const stored =
-      typeof window !== "undefined"
-        ? window.localStorage.getItem("kinship-role")
-        : null;
-    setRole(stored === "guide" ? "guide" : "seeker");
+    if (typeof window === "undefined") return;
+    const handleStorage = (e) => {
+      if (e.key !== "kinship-role") return;
+      setRole(e.newValue === "guide" ? "guide" : "seeker");
+    };
+    window.addEventListener("storage", handleStorage);
+    return () => window.removeEventListener("storage", handleStorage);
   }, []);
-
-  if (!mounted) {
-    return (
-      <div className="min-h-[50vh] flex items-center justify-center bg-gray-50">
-        <div className="h-10 w-10 rounded-full border-2 border-accent/50 border-t-primary animate-spin" />
-      </div>
-    );
-  }
 
   const isGuide = role === "guide";
   const chats = isGuide ? guideActiveChatsDemo : seekerActiveChatsDemo;
