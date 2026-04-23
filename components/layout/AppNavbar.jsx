@@ -87,12 +87,10 @@ export default function AppNavbar() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const handleHashChange = () => syncHash();
     const handleStorage = (e) => {
       if (e.key !== "kinship-role") return;
       setRole(e.newValue === "guide" ? "guide" : "seeker");
     };
-    syncHash();
     window.addEventListener("hashchange", syncHash);
     window.addEventListener("storage", handleStorage);
     return () => {
