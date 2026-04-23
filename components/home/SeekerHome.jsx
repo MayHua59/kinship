@@ -7,6 +7,8 @@ import {
   HandRaisedIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/solid";
+import GuideCard from "@/components/guide/GuideCard";
+import { guides } from "@/data/guide";
 
 export default function SeekerHome() {
   return (
@@ -62,6 +64,34 @@ export default function SeekerHome() {
             <CurrencyDollarIcon className="h-6 w-6 text-accent" aria-hidden />
             <span className="font-semibold text-gray-800">My credits</span>
           </a>
+        </div>
+      </section>
+
+      <section aria-labelledby="seeker-recommended-guides" className="space-y-3">
+        <div className="flex items-end justify-between gap-3">
+          <div>
+            <h2
+              id="seeker-recommended-guides"
+              className="text-sm font-semibold text-gray-500 uppercase tracking-wide"
+            >
+              Recommended guides
+            </h2>
+            <p className="text-sm text-gray-600 mt-1">
+              A few high-rated guides to get you started (dummy data).
+            </p>
+          </div>
+          <Link
+            href="/find-guide"
+            className="shrink-0 text-sm font-semibold text-primary hover:underline underline-offset-2"
+          >
+            View all
+          </Link>
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2">
+          {guides.slice(0, 4).map((guide) => (
+            <GuideCard key={guide.id} guide={guide} />
+          ))}
         </div>
       </section>
 
