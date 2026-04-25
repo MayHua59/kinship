@@ -1,4 +1,16 @@
-export default function GuideCard({ guide }) {
+export default function GuideCard({
+  guide,
+  requestStatus = "idle",
+  onRequest,
+  onCancelClick,
+}) {
+  const isSending = requestStatus === "sending";
+  const isPending = requestStatus === "pending";
+  const label = isSending ? "Sending request…" : isPending ? "Cancel Request" : "Request Chat";
+  const buttonClass = isPending
+    ? "bg-red-600 hover:bg-red-700"
+    : "bg-primary hover:opacity-90";
+
   return (
     <div className="bg-white p-5 rounded-2xl shadow hover:shadow-md transition">
       <h3 className="text-lg font-semibold text-gray-800">{guide.name}</h3>
@@ -15,8 +27,13 @@ export default function GuideCard({ guide }) {
         </span>
       </div>
 
-      <button className="mt-4 w-full bg-primary text-white py-2 rounded-lg hover:opacity-90 transition">
-        Request Chat
+      <button
+        type="button"
+        onClick={() => (isPending ? onCancelClick?.() : onRequest?.())}
+        disabled={isSending || (!isPending && !onRequest) || (isPending && !onCancelClick)}
+        className={`mt-4 w-full ${buttonClass} text-white py-2 rounded-lg transition disabled:opacity-60 disabled:cursor-not-allowed`}
+      >
+        {label}
       </button>
     </div>
   );
