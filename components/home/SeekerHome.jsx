@@ -42,13 +42,13 @@ export default function SeekerHome() {
             <MagnifyingGlassIcon className="h-6 w-6 text-primary" aria-hidden />
             <span className="font-semibold text-gray-800">Find a guide</span>
           </Link>
-          <a
-            href="#requests"
+          <Link
+            href="/my-requests"
             className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-200 hover:border-accent/50 hover:shadow-md hover:shadow-accent/15 hover:-translate-y-0.5"
           >
             <ClipboardDocumentListIcon className="h-6 w-6 text-accent" aria-hidden />
             <span className="font-semibold text-gray-800">My requests</span>
-          </a>
+          </Link>
           <Link
             href="/chats"
             className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-200 hover:border-primary/50 hover:shadow-md hover:shadow-primary/10 hover:-translate-y-0.5"
