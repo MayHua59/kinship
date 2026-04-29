@@ -5,7 +5,7 @@ import { guides } from "@/data/guide";
 import { useEffect, useMemo, useRef, useState } from "react";
 import ConfirmModal from "@/components/ui/ConfirmModal";
 
-export default function GuideList() {
+export default function GuideList({ limit, items }) {
   const timeoutsRef = useRef(new Map());
   const [statusById, setStatusById] = useState({});
   const [cancelGuideId, setCancelGuideId] = useState(null);
@@ -19,7 +19,11 @@ export default function GuideList() {
     };
   }, []);
 
-  const recommended = useMemo(() => guides, []);
+  const recommended = useMemo(() => {
+    const list = Array.isArray(items) ? items : guides;
+    const safeLimit = Number.isFinite(limit) ? Math.max(0, limit) : undefined;
+    return typeof safeLimit === "number" ? list.slice(0, safeLimit) : list;
+  }, [items, limit]);
 
   function requestChat(guideId) {
     setStatusById((prev) => ({ ...prev, [guideId]: "sending" }));

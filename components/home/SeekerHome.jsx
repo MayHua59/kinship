@@ -7,8 +7,7 @@ import {
   HandRaisedIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/solid";
-import GuideCard from "@/components/guide/GuideCard";
-import { guides } from "@/data/guide";
+import GuideList from "@/components/guide/GuideList";
 
 export default function SeekerHome() {
   return (
@@ -88,11 +87,7 @@ export default function SeekerHome() {
           </Link>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2">
-          {guides.slice(0, 4).map((guide) => (
-            <GuideCard key={guide.id} guide={guide} />
-          ))}
-        </div>
+          <GuideList limit={4} />
       </section>
 
       <section
