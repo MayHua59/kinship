@@ -48,7 +48,7 @@ const GUIDE_LINKS = [
     match: (path, hash) => path === "/" && (!hash || hash === "#"),
   },
   {
-    href: "/#requests",
+    href: "/requests",
     label: "Requests",
     icon: InboxArrowDownIcon,
     match: (path, hash) => path === "/" && hash === "#requests",
