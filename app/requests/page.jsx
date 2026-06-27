@@ -1,20 +1,10 @@
-import Link from "next/link";
 import { InboxArrowDownIcon } from "@heroicons/react/24/solid";
 import GuideIncomingRequestsList from "@/components/guide/GuideIncomingRequestsList";
 
 export default function GuideRequestsPage() {
   return (
-    <main className="min-h-screen bg-gray-50 p-4 md:p-8">
+    <main className="min-h-screen bg-gray-50 px-4 pb-8 pt-2 md:px-8 md:pb-8">
       <div className="max-w-2xl mx-auto space-y-6">
-        <div className="mb-2">
-          <Link
-            href="/"
-            className="text-sm font-semibold text-primary hover:underline underline-offset-2"
-          >
-            ← Home
-          </Link>
-        </div>
-
         <header className="space-y-1">
           <p className="text-sm font-medium uppercase tracking-wide text-gray-500">
             Guide

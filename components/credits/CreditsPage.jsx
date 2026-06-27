@@ -1,10 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { guideCreditsDemo, seekerCreditsDemo } from "@/data/credits";
 import { DEMO_DISPLAY_NAME } from "@/data/user";
-import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 
 function ActivityRow({ title, detail, amount, time }) {
   const isPositive = amount > 0;
@@ -50,15 +48,7 @@ export default function CreditsPage() {
         <div className="absolute top-[-60px] right-[-40px] w-56 h-56 bg-accent/25 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-[-40px] left-[-20px] w-48 h-48 bg-primary/15 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="relative max-w-2xl mx-auto px-4 pt-6 pb-16">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-accent transition-colors mb-8"
-          >
-            <ArrowLeftIcon className="h-4 w-4" aria-hidden />
-            Back to home
-          </Link>
-
+        <div className="relative max-w-2xl mx-auto px-4 pt-2 pb-16">
           <header className="mb-8">
             <p className="text-sm font-medium uppercase tracking-wide mb-1">
               <span className="text-primary">KinCircle</span>

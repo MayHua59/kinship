@@ -3,10 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { guideActiveChatsDemo, seekerActiveChatsDemo } from "@/data/active-chats";
-import {
-  ArrowLeftIcon,
-  ChatBubbleLeftRightIcon,
-} from "@heroicons/react/24/solid";
+import { ChatBubbleLeftRightIcon } from "@heroicons/react/24/solid";
 
 function initials(name) {
   return name
@@ -84,15 +81,7 @@ export default function ActiveChatsPage() {
         <div className="absolute top-[-60px] right-[-40px] w-56 h-56 bg-accent/25 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-[-40px] left-[-20px] w-48 h-48 bg-primary/12 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="relative max-w-2xl mx-auto px-4 pt-6 pb-16">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-accent transition-colors mb-8"
-          >
-            <ArrowLeftIcon className="h-4 w-4" aria-hidden />
-            Back to home
-          </Link>
-
+        <div className="relative max-w-2xl mx-auto px-4 pt-2 pb-16">
           <header className="mb-8">
             <p className="text-sm font-medium uppercase tracking-wide mb-1">
               <span className="text-primary">KinCircle</span>
