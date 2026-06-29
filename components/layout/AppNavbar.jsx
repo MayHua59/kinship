@@ -110,7 +110,7 @@ export default function AppNavbar() {
           onClick={() => setMenuOpen(false)}
         >
           <span className="text-primary">Kin</span>
-          <span className="text-gray-800">Circle</span>
+          <span className="text-gray-800">Ship</span>
         </Link>
 
         <nav
